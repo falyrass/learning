@@ -1,123 +1,490 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Boutique en ligne</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .product-card {
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    .navbar-brand {
-      font-weight: bold;
-    }
-    .footer {
-      background-color: #343a40;
-      color: #fff;
-      padding: 30px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProGen - Créateur de prompt</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-      <a class="navbar-brand" href="#">MaBoutique</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-              aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="#">Accueil</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Produits</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Panier</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <header class="py-5 text-center bg-light">
-    <div class="container">
-      <h1 class="display-5 fw-bold">Bienvenue sur MaBoutique</h1>
-      <p class="lead text-muted">Des produits de qualité à prix imbattables</p>
-    </div>
-  </header>
-
-  <!-- Produits -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row g-4">
-        <!-- Produit 1 -->
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card h-100">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produit 1">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Produit 1</h5>
-              <p class="card-text text-muted">29,99 €</p>
-              <button class="btn btn-primary mt-auto">Ajouter au panier</button>
+    <div class="container-fluid">
+        <div id="content-area">
+            <div id="welcomeSection" class="app-section">
+                <h1 class="mb-4">Bienvenue sur ProGen</h1>
+                <p class="lead">Créer le prompt exact pour votre affiche publicitaire</p>
+                <button id="startButton" class="btn btn-primary mt-4">Commencez!</button>
             </div>
-          </div>
-        </div>
 
-        <!-- Produit 2 -->
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card h-100">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produit 2">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Produit 2</h5>
-              <p class="card-text text-muted">49,99 €</p>
-              <button class="btn btn-primary mt-auto">Ajouter au panier</button>
+            <div id="themeSelection" class="app-section" style="display:none;">
+                <p class="lead mb-4">1/22. Thème général</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="promotion">Promotion</button>
+                    <button class="btn btn-choice" data-choice-value="solde">Solde</button>
+                    <button class="btn btn-choice" data-choice-value="lancement-produits">Lancement de produits</button>
+                    <button class="btn btn-choice" data-choice-value="fete">Fête</button>
+                    <button class="btn btn-choice" data-choice-value="technologie">Technologie</button>
+                    <button class="btn btn-choice" data-choice-value="musique">Musique</button>
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonTheme" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonTheme" class="btn btn-success" disabled>Valider</button>
+                </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Produit 3 -->
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card h-100">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produit 3">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Produit 3</h5>
-              <p class="card-text text-muted">19,99 €</p>
-              <button class="btn btn-primary mt-auto">Ajouter au panier</button>
+            <div id="colorPaletteSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">2/22. Palette de couleurs</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="rouge-orange-noir">Rouge, Orange, Noir</button>
+                    <button class="btn btn-choice" data-choice-value="orange-turquoise-bleu-marine">Orange, Turquoise, Bleu marine</button>
+                    <button class="btn btn-choice" data-choice-value="rouge-vert">Rouge, Vert</button>
+                    <button class="btn btn-choice" data-choice-value="orange-jaune-rouge">Orange, Jaune, Rouge</button>
+                    <button class="btn btn-choice" data-choice-value="mauve-vert">Mauve, Vert</button>
+                    <button class="btn btn-choice" data-choice-value="moutarde-noir">Moutarde, Noir</button>
+                    <button class="btn btn-choice" data-choice-value="rose-raisin">Rose, Raisin</button>
+                    <button class="btn btn-choice" data-choice-value="cyan-magenta-jaune-noir">Cyan, Magenta, Jaune, Noir</button>
+                    <button class="btn btn-choice" data-choice-value="bleu-marron-indigo">Bleu, Marron, Indigo</button>
+                    <button class="btn btn-choice" data-choice-value="ecume-de-mer-saumon-bleu-marine">Écume de mer, Saumon, Bleu marine</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherColorOption">Autre</button>
+                </div>
+                <div id="otherColorInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherColorInput" class="form-label visually-hidden">Saisissez votre palette de couleurs</label>
+                    <input type="text" class="form-control" id="otherColorInput" placeholder="Ex: Bleu ciel, Vert pomme, Gris anthracite">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonColorPalette" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonColorPalette" class="btn btn-success" disabled>Valider</button>
+                </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Produit 4 -->
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card h-100">
-            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produit 4">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Produit 4</h5>
-              <p class="card-text text-muted">39,99 €</p>
-              <button class="btn btn-primary mt-auto">Ajouter au panier</button>
+            <div id="backgroundSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">3/22. Fond</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="lumineux">Lumineux</button>
+                    <button class="btn btn-choice" data-choice-value="degrade">Dégradé</button>
+                    <button class="btn btn-choice" data-choice-value="flou">Flou</button>
+                    <button class="btn btn-choice" data-choice-value="avec-motif">Avec motif</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherBackgroundOption">Autre</button>
+                </div>
+                <div id="otherBackgroundInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherBackgroundInput" class="form-label visually-hidden">Décrivez votre fond</label>
+                    <input type="text" class="form-control" id="otherBackgroundInput" placeholder="Ex: Ciel étoilé, Mur en briques, Forêt luxuriante">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonBackground" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonBackground" class="btn btn-success" disabled>Valider</button>
+                </div>
             </div>
-          </div>
+
+            <div id="imageStyleSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">4/22. Style d'image</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="realiste">Réaliste</button>
+                    <button class="btn btn-choice" data-choice-value="cartoon">Cartoon</button>
+                    <button class="btn btn-choice" data-choice-value="peinture">Peinture</button>
+                    <button class="btn btn-choice" data-choice-value="esquisse">Esquisse</button>
+                    <button class="btn btn-choice" data-choice-value="low-poly">Low Poly</button>
+                    <button class="btn btn-choice" data-choice-value="dessin-anime">Dessin animé</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherImageStyleOption">Autre</button>
+                </div>
+                <div id="otherImageStyleInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherImageStyleInput" class="form-label visually-hidden">Décrivez le style d'image</label>
+                    <input type="text" class="form-control" id="otherImageStyleInput" placeholder="Ex: Style aquarelle, Art numérique, Pixélisé">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonImageStyle" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonImageStyle" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="ambianceSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">5/22. Ambiance</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="joyeuse">Joyeuse</button>
+                    <button class="btn btn-choice" data-choice-value="serieuse">Sérieuse</button>
+                    <button class="btn btn-choice" data-choice-value="festive">Festive</button>
+                    <button class="btn btn-choice" data-choice-value="mysterieuse">Mystérieuse</button>
+                    <button class="btn btn-choice" data-choice-value="calme">Calme</button>
+                    <button class="btn btn-choice" data-choice-value="energique">Énergique</button>
+                    <button class="btn btn-choice" data-choice-value="minimaliste">Minimaliste</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherAmbianceOption">Autre</button>
+                </div>
+                <div id="otherAmbianceInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherAmbianceInput" class="form-label visually-hidden">Décrivez l'ambiance</label>
+                    <input type="text" class="form-control" id="otherAmbianceInput" placeholder="Ex: Rétro-futuriste, Urbaine, Rurale">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonAmbiance" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonAmbiance" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="mainSubjectsSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">6/22. Objets/Sujets principaux</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="personnes">Personnes</button>
+                    <button class="btn btn-choice" data-choice-value="produits">Produits</button>
+                    <button class="btn btn-choice" data-choice-value="paysages">Paysages</button>
+                    <button class="btn btn-choice" data-choice-value="animaux">Animaux</button>
+                    <button class="btn btn-choice" data-choice-value="nourriture">Nourriture</button>
+                    <button class="btn btn-choice" data-choice-value="objets-specifiques">Objets spécifiques</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherMainSubjectsOption">Autre</button>
+                </div>
+                <div id="otherMainSubjectsInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherMainSubjectsInput" class="form-label visually-hidden">Décrivez les objets/sujets</label>
+                    <input type="text" class="form-control" id="otherMainSubjectsInput" placeholder="Ex: Une tasse de café fumante, Un smartphone moderne">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonMainSubjects" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonMainSubjects" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="mainTextSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">7/22. Texte principal (accroche)</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="impactant">Impactant</button>
+                    <button class="btn btn-choice" data-choice-value="informatif">Informatif</button>
+                    <button class="btn btn-choice" data-choice-value="humoristique">Humoristique</button>
+                    <button class="btn btn-choice" data-choice-value="emotionnel">Émotionnel</button>
+                    <button class="btn btn-choice" data-choice-value="question">Question</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherMainTextOption">Autre</button>
+                </div>
+                <div id="otherMainTextInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherMainTextInput" class="form-label visually-hidden">Décrivez le texte principal</label>
+                    <input type="text" class="form-control" id="otherMainTextInput" placeholder="Ex: Un message court et percutant, Une énigme">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonMainText" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonMainText" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="fontSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">8/22. Police de caractères</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="serif">Serif (classique)</button>
+                    <button class="btn btn-choice" data-choice-value="sans-serif">Sans-Serif (moderne)</button>
+                    <button class="btn btn-choice" data-choice-value="manuscrite">Manuscrite</button>
+                    <button class="btn btn-choice" data-choice-value="fantaisie">Fantaisie</button>
+                    <button class="btn btn-choice" data-choice-value="bold">Bold</button>
+                    <button class="btn btn-choice" data-choice-value="fine">Fine</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherFontOption">Autre</button>
+                </div>
+                <div id="otherFontInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherFontInput" class="form-label visually-hidden">Décrivez la police de caractères</label>
+                    <input type="text" class="form-control" id="otherFontInput" placeholder="Ex: Style graffiti, Futiriste, Calligraphique">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonFont" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonFont" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="luminositySection" class="app-section" style="display:none;">
+                <p class="lead mb-4">9/22. Luminosité</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="haute-luminosite">Haute luminosité</button>
+                    <button class="btn btn-choice" data-choice-value="basse-luminosite">Basse luminosité</button>
+                    <button class="btn btn-choice" data-choice-value="contraste-eleve">Contraste élevé</button>
+                    <button class="btn btn-choice" data-choice-value="ambiance-tamisee">Ambiance tamisée</button>
+                    <button class="btn btn-choice" data-choice-value="naturelle">Naturelle</button>
+                    <button class="btn btn-choice" data-choice-value="artificielle">Artificielle</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherLuminosityOption">Autre</button>
+                </div>
+                <div id="otherLuminosityInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherLuminosityInput" class="form-label visually-hidden">Décrivez la luminosité</label>
+                    <input type="text" class="form-control" id="otherLuminosityInput" placeholder="Ex: Lumière du matin, Effet néon, Obscurité profonde">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonLuminosity" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonLuminosity" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="viewAngleSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">10/22. Angle de vue</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="plongee">Plongée</button>
+                    <button class="btn btn-choice" data-choice-value="contre-plongee">Contre-plongée</button>
+                    <button class="btn btn-choice" data-choice-value="vue-oiseau">Vue d'oiseau</button>
+                    <button class="btn btn-choice" data-choice-value="vue-face">Vue de face</button>
+                    <button class="btn btn-choice" data-choice-value="vue-laterale">Vue latérale</button>
+                    <button class="btn btn-choice" data-choice-value="gros-plan">Gros plan</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherViewAngleOption">Autre</button>
+                </div>
+                <div id="otherViewAngleInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherViewAngleInput" class="form-label visually-hidden">Décrivez l'angle de vue</label>
+                    <input type="text" class="form-control" id="otherViewAngleInput" placeholder="Ex: Vue macro, Perspective isométrique">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonViewAngle" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonViewAngle" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="compositionSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">11/22. Composition</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="regle-tiers">Règle des tiers</button>
+                    <button class="btn btn-choice" data-choice-value="symmetrique">Symétrique</button>
+                    <button class="btn btn-choice" data-choice-value="asymmetrique">Asymétrique</button>
+                    <button class="btn btn-choice" data-choice-value="centree">Centrée</button>
+                    <button class="btn btn-choice" data-choice-value="dynamique">Dynamique</button>
+                    <button class="btn btn-choice" data-choice-value="statique">Statique</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherCompositionOption">Autre</button>
+                </div>
+                <div id="otherCompositionInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherCompositionInput" class="form-label visually-hidden">Décrivez la composition</label>
+                    <input type="text" class="form-control" id="otherCompositionInput" placeholder="Ex: Spirale dorée, Cadre dans le cadre">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonComposition" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonComposition" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="specialEffectsSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">12/22. Effets spéciaux</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="flou-artistique">Flou artistique</button>
+                    <button class="btn btn-choice" data-choice-value="reflets">Reflets</button>
+                    <button class="btn btn-choice" data-choice-value="particules">Particules (poussière, étincelles)</button>
+                    <button class="btn btn-choice" data-choice-value="lumiere-volumetrique">Lumière volumétrique</button>
+                    <button class="btn btn-choice" data-choice-value="effet-mouvement">Effet de mouvement</button>
+                    <button class="btn btn-choice" data-choice-value="bokeh">Bokeh</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherSpecialEffectsOption">Autre</button>
+                </div>
+                <div id="otherSpecialEffectsInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherSpecialEffectsInput" class="form-label visually-hidden">Décrivez les effets spéciaux</label>
+                    <input type="text" class="form-control" id="otherSpecialEffectsInput" placeholder="Ex: Effet glitch, Vapeur, Pluie de confettis">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonSpecialEffects" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonSpecialEffects" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="texturesSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">13/22. Textures</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="lisse">Lisse</button>
+                    <button class="btn btn-choice" data-choice-value="rugueuse">Rugueuse</button>
+                    <button class="btn btn-choice" data-choice-value="metallique">Métallique</button>
+                    <button class="btn btn-choice" data-choice-value="bois">Bois</button>
+                    <button class="btn btn-choice" data-choice-value="tissu">Tissu</button>
+                    <button class="btn btn-choice" data-choice-value="verre">Verre</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherTexturesOption">Autre</button>
+                </div>
+                <div id="otherTexturesInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherTexturesInput" class="form-label visually-hidden">Décrivez les textures</label>
+                    <input type="text" class="form-control" id="otherTexturesInput" placeholder="Ex: Texture de papier froissé, Aspect cuir vieilli">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonTextures" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonTextures" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="lightingSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">14/22. Éclairage</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="doux">Doux</button>
+                    <button class="btn btn-choice" data-choice-value="dur">Dur</button>
+                    <button class="btn btn-choice" data-choice-value="contre-jour">Contre-jour</button>
+                    <button class="btn btn-choice" data-choice-value="lateral">Latéral</button>
+                    <button class="btn btn-choice" data-choice-value="en-studio">En studio</button>
+                    <button class="btn btn-choice" data-choice-value="naturel">Naturel</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherLightingOption">Autre</button>
+                </div>
+                <div id="otherLightingInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherLightingInput" class="form-label visually-hidden">Décrivez l'éclairage</label>
+                    <input type="text" class="form-control" id="otherLightingInput" placeholder="Ex: Éclairage de scène, Lumières clignotantes">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonLighting" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonLighting" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="depthOfFieldSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">15/22. Profondeur de champ</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="faible">Faible</button>
+                    <button class="btn btn-choice" data-choice-value="grande">Grande</button>
+                    <button class="btn btn-choice" data-choice-value="selective">Sélective</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherDepthOfFieldOption">Autre</button>
+                </div>
+                <div id="otherDepthOfFieldInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherDepthOfFieldInput" class="form-label visually-hidden">Décrivez la profondeur de champ</label>
+                    <input type="text" class="form-control" id="otherDepthOfFieldInput" placeholder="Ex: Arrière-plan totalement flou, Tout est net">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonDepthOfField" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonDepthOfField" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="atmosphereSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">16/22. Atmosphère</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="brouillard">Brouillard</button>
+                    <button class="btn btn-choice" data-choice-value="pluie">Pluie</button>
+                    <button class="btn btn-choice" data-choice-value="neige">Neige</button>
+                    <button class="btn btn-choice" data-choice-value="soleil-couchant">Soleil couchant</button>
+                    <button class="btn btn-choice" data-choice-value="clair-de-lune">Clair de lune</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherAtmosphereOption">Autre</button>
+                </div>
+                <div id="otherAtmosphereInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherAtmosphereInput" class="form-label visually-hidden">Décrivez l'atmosphère</label>
+                    <input type="text" class="form-control" id="otherAtmosphereInput" placeholder="Ex: Brume matinale, Ciel orageux">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonAtmosphere" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonAtmosphere" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="specificDetailsSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">17/22. Détails spécifiques</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="logo-visible">Logo visible</button>
+                    <button class="btn btn-choice" data-choice-value="slogan">Slogan</button>
+                    <button class="btn btn-choice" data-choice-value="informations-contact">Informations de contact</button>
+                    <button class="btn btn-choice" data-choice-value="appel-action">Appel à l'action</button>
+                    <button class="btn btn-choice" data-choice-value="petits-objets">Petits objets</button>
+                    <button class="btn btn-choice" data-choice-value="personnage-secondaire">Personnage secondaire</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherSpecificDetailsOption">Autre</button>
+                </div>
+                <div id="otherSpecificDetailsInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherSpecificDetailsInput" class="form-label visually-hidden">Décrivez les détails spécifiques</label>
+                    <input type="text" class="form-control" id="otherSpecificDetailsInput" placeholder="Ex: Un QR code, La date d'un événement">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonSpecificDetails" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonSpecificDetails" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="dominantColorsSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">18/22. Couleurs dominantes (si non inclus dans palette)</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="couleurs-chaudes">Couleurs chaudes</button>
+                    <button class="btn btn-choice" data-choice-value="couleurs-froides">Couleurs froides</button>
+                    <button class="btn btn-choice" data-choice-value="monochromatique">Monochromatique</button>
+                    <button class="btn btn-choice" data-choice-value="complementaires">Complémentaires</button>
+                    <button class="btn btn-choice" data-choice-value="vibrantes">Vibrantes</button>
+                    <button class="btn btn-choice" data-choice-value="pastels">Pastels</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherDominantColorsOption">Autre</button>
+                </div>
+                <div id="otherDominantColorsInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherDominantColorsInput" class="form-label visually-hidden">Décrivez les couleurs dominantes</label>
+                    <input type="text" class="form-control" id="otherDominantColorsInput" placeholder="Ex: Vert forêt et or, Bleu ciel et blanc pur">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonDominantColors" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonDominantColors" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="imageFormatSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">19/22. Format de l'image</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="carre">Carré</button>
+                    <button class="btn btn-choice" data-choice-value="paysage">Paysage (16:9)</button>
+                    <button class="btn btn-choice" data-choice-value="portrait">Portrait (9:16)</button>
+                    <button class="btn btn-choice" data-choice-value="banniere">Bannière</button>
+                    <button class="btn btn-choice" data-choice-value="story">Story</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherImageFormatOption">Autre</button>
+                </div>
+                <div id="otherImageFormatInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherImageFormatInput" class="form-label visually-hidden">Décrivez le format de l'image</label>
+                    <input type="text" class="form-control" id="otherImageFormatInput" placeholder="Ex: 4:3, Panoramique ultra-large">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonImageFormat" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonImageFormat" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="targetAudienceSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">20/22. Public cible</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="jeunes">Jeunes</button>
+                    <button class="btn btn-choice" data-choice-value="adultes">Adultes</button>
+                    <button class="btn btn-choice" data-choice-value="familles">Familles</button>
+                    <button class="btn btn-choice" data-choice-value="professionnels">Professionnels</button>
+                    <button class="btn btn-choice" data-choice-value="grand-public">Grand public</button>
+                    <button class="btn btn-choice" data-choice-value="niche">Niche (spécifiez)</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherTargetAudienceOption">Autre</button>
+                </div>
+                <div id="otherTargetAudienceInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherTargetAudienceInput" class="form-label visually-hidden">Décrivez le public cible</label>
+                    <input type="text" class="form-control" id="otherTargetAudienceInput" placeholder="Ex: Amateurs de jeux vidéo, Seniors actifs">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonTargetAudience" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonTargetAudience" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="diffusionMediaSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">21/22. Média de diffusion</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="reseaux-sociaux">Réseaux sociaux</button>
+                    <button class="btn btn-choice" data-choice-value="imprime">Imprimé (magazines, affiches)</button>
+                    <button class="btn btn-choice" data-choice-value="web">Web (bannières, sites)</button>
+                    <button class="btn btn-choice" data-choice-value="video">Vidéo (thumbnail)</button>
+                    <button class="btn btn-choice" data-choice-value="publicite-exterieure">Publicité extérieure</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherDiffusionMediaOption">Autre</button>
+                </div>
+                <div id="otherDiffusionMediaInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherDiffusionMediaInput" class="form-label visually-hidden">Décrivez le média de diffusion</label>
+                    <input type="text" class="form-control" id="otherDiffusionMediaInput" placeholder="Ex: Écran géant, Panneau d'affichage numérique">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonDiffusionMedia" class="btn btn-secondary">Précédent</button>
+                    <button id="validateButtonDiffusionMedia" class="btn btn-success" disabled>Valider</button>
+                </div>
+            </div>
+
+            <div id="messageToneSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">22/22. Ton du message</p>
+                <div class="button-group d-flex flex-wrap justify-content-center">
+                    <button class="btn btn-choice" data-choice-value="direct">Direct</button>
+                    <button class="btn btn-choice" data-choice-value="subtil">Subtil</button>
+                    <button class="btn btn-choice" data-choice-value="ludique">Ludique</button>
+                    <button class="btn btn-choice" data-choice-value="inspirant">Inspirant</button>
+                    <button class="btn btn-choice" data-choice-value="autoritaire">Autoritaire</button>
+                    <button class="btn btn-choice" data-choice-value="informatif">Informatif</button>
+                    <button class="btn btn-choice" data-choice-value="autre" id="otherMessageToneOption">Autre</button>
+                </div>
+                <div id="otherMessageToneInputContainer" class="mt-3" style="display:none;">
+                    <label for="otherMessageToneInput" class="form-label visually-hidden">Décrivez le ton du message</label>
+                    <input type="text" class="form-control" id="otherMessageToneInput" placeholder="Ex: Sarcastic, Poétique, Urgente">
+                </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonMessageTone" class="btn btn-secondary">Précédent</button>
+                    <button id="generatePromptButton" class="btn btn-primary" disabled>Générer le prompt</button>
+                </div>
+            </div>
+
+            <div id="finalPromptSection" class="app-section" style="display:none;">
+                <p class="lead mb-4">Votre prompt personnalisé est prêt !</p>
+                <div class="alert alert-info" role="alert" id="generatedPromptOutput">
+                    </div>
+                <div class="btn-bottom-actions">
+                    <button id="backButtonFromPrompt" class="btn btn-secondary">Modifier le dernier choix</button>
+                    <button id="startOverButton" class="btn btn-primary">Commencer une nouvelle génération</button>
+                </div>
+            </div>
+
         </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer text-center">
-    <div class="container">
-      <p class="mb-0">© 2025 MaBoutique. Tous droits réservés.</p>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-QiPR5z/s3XpcU1I4G8d341f237l+Bf+D0XqT2oXg01e0NlF9g2d+m2E9/n6Q6c" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 </html>
